@@ -1,38 +1,53 @@
 // 12S24040 - Rony Reynaldy Pangaribuan
 // 12S24023 - Jaya Bestina Simbolon
+
 import java.util.*;
 import java.lang.Math;
 
-public class JavaApplication {
+public class T03 {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int stok, tahunterbit;
-        String isbn, judul, penulis, penerbit, formatbukuelektrik, none, kategori, kategorirate, ending, kategoridiskon;
-        double hargabeli, minimummargin, rating, diskon, margin, harga;
+        String iSBN;
+        String judul;
+        String penulis;
+        String tahunterbit;
+        String penerbit;
+        String formatbuku;
+        double hargapembelian;
+        double minimummargin;
+        int stok;
+        double rating;
+        String kategori;
 
-        kategorirate = "";
+        kategori = " ";
+        String kategoridiskon;
+        String kategoribuku;
+        double penilaianbuku;
+
         do {
-            isbn = input.nextLine();
-            if (isbn.equals("---")) {
+            iSBN = input.nextLine();
+            if (iSBN.equals("---")) {
             } else {
                 judul = input.nextLine();
                 penulis = input.nextLine();
-                tahunterbit = Integer.parseInt(input.nextLine());
+                tahunterbit = input.nextLine();
                 penerbit = input.nextLine();
-                formatbukuelektrik = input.nextLine();
-                hargabeli = Double.parseDouble(input.nextLine());
-                if (hargabeli >= 0) {
-                    diskon = hargabeli * -1;
+                if (penerbit.equals("---")) {
+                    penerbit = "---";
+                } else {
+                    penerbit = penerbit;
                 }
+                formatbuku = input.nextLine();
+                hargapembelian = Double.parseDouble(input.nextLine());
                 minimummargin = Double.parseDouble(input.nextLine());
                 if (minimummargin > 0) {
                     kategoridiskon = "---";
                 } else {
-                    if (minimummargin < -(hargabeli * 0.4)) {
+                    if (minimummargin < -(hargapembelian * 40 / 100)) {
                         kategoridiskon = "Once in a lifetime";
                     } else {
-                        if (minimummargin < -(hargabeli * 0.2)) {
+                        if (minimummargin < -(hargapembelian * 20 / 100)) {
                             kategoridiskon = "Never come twice";
                         } else {
                             kategoridiskon = "No regret";
@@ -53,22 +68,20 @@ public class JavaApplication {
                             if (rating >= 3.0) {
                                 kategori = "Average";
                             } else {
-                                if (rating >= 0 && rating < 3.0) {
+                                if (rating < 3.0) {
                                     kategori = "Low";
-                                } else {
-                                    kategori = "none";
                                 }
                             }
                         }
                     }
                 }
+                if (kategoridiskon.equals("Once in a lifetime") && kategori.equals("Best Pick")) {
+                    kategoribuku = "The ultimate best";
+                } else {
+                    kategoribuku = "---";
+                }
+                System.out.println(iSBN + "|" + judul + "|" + penulis + "|" + tahunterbit + "|" + penerbit + "|" + formatbuku + "|" + hargapembelian + "|" + minimummargin + "|" + stok + "|" + rating + "|" + kategori + "|" + kategoridiskon + "|" + kategoribuku);
             }
-            if (kategoridiskon.equals("Once in a lifetime") && kategorirate.equals("Best Pick")) {
-                ending = "The Ultimate Best";
-            } else {
-                ending = "---";
-            }
-            System.out.println(isbn + "|" + judul + "|" + penulis + "|" + tahunterbit + "|" + penerbit + "|" + formatbukuelektrik + "|" + hargabeli + "|" + minimummargin + "|" + stok + "|" + rating + "|" + kategori + "|" + kategorirate + "|" + kategoridiskon + "|" + ending);
-        } while (isbn.equals("---"));
+        } while (!iSBN.equals("---"));
     }
 }
